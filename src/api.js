@@ -4,9 +4,10 @@ export async function getWeather(city) {
   );
   const data = await response.json();
   console.log(data);
-  const temp = data.currentConditions.temp;
+  const temp = Math.floor((data.currentConditions.temp - 32) / 1.8);
   const icon = data.currentConditions.icon;
   const resolvedAddress = data.resolvedAddress;
   const timezone = data.timezone;
-  return [temp, icon, resolvedAddress, timezone];
+  const conditions = data.currentConditions.conditions;
+  return [temp, icon, resolvedAddress, timezone, conditions];
 }
